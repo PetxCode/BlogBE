@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteOnePost = exports.unLikePost = exports.viewPost = exports.likePost = exports.UpdateOnePost = exports.readUserPost = exports.readOnePost = exports.readPost = exports.createPost = void 0;
+exports.deleteOnePost = exports.unLikePost = exports.viewPost = exports.likePost = exports.UpdateOnePost = exports.readUserPost = exports.readOnePost = exports.readPostCategory = exports.readPost = exports.createPost = void 0;
 const cloudinary_1 = __importDefault(require("../config/cloudinary"));
 const postModel_1 = __importDefault(require("../model/postModel"));
 const authModel_1 = __importDefault(require("../model/authModel"));
@@ -61,6 +61,30 @@ const readPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.readPost = readPost;
+const readPostCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const makeSearch = req.query.search
+            ? {
+                $or: [
+                    { category: { $regex: req.query.search, $options: "i" } },
+                    // { content: { $regex: req.query.search, $options: "i" } },
+                ],
+            }
+            : {};
+        const post = yield postModel_1.default.find(makeSearch);
+        // const post = await postModel.find({ category: req.query.search });
+        return res.status(200).json({
+            message: "read Post",
+            data: post,
+        });
+    }
+    catch (error) {
+        return res.status(404).json({
+            message: "Unable to read Posts",
+        });
+    }
+});
+exports.readPostCategory = readPostCategory;
 const readOnePost = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { postID } = req.params;

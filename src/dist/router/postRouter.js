@@ -9,6 +9,8 @@ const multer_1 = require("../config/multer");
 const router = express_1.default.Router();
 router.route("/:authID/create").post(multer_1.upload, postController_1.createPost);
 router.route("/posts").get(postController_1.readPost);
+router.route("/posts").get(postController_1.readPost);
+router.route("/category/posts").get(postController_1.readPostCategory);
 router.route("/:postID/post-detail").get(postController_1.readOnePost);
 router.route("/:authID/read-user-post").get(postController_1.readUserPost);
 router.route("/:postID/update-post").patch(postController_1.UpdateOnePost);

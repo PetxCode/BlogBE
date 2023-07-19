@@ -6,6 +6,7 @@ import {
   likePost,
   readOnePost,
   readPost,
+  readPostCategory,
   readUserPost,
   unLikePost,
   viewPost,
@@ -16,6 +17,11 @@ const router: Router = express.Router();
 
 router.route("/:authID/create").post(upload, createPost);
 router.route("/posts").get(readPost);
+
+router.route("/posts").get(readPost);
+
+router.route("/category/posts").get(readPostCategory);
+
 router.route("/:postID/post-detail").get(readOnePost);
 router.route("/:authID/read-user-post").get(readUserPost);
 router.route("/:postID/update-post").patch(UpdateOnePost);

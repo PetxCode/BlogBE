@@ -59,6 +59,33 @@ export const readPost = async (
   }
 };
 
+export const readPostCategory = async (
+  req: Request,
+  res: Response,
+): Promise<Response> => {
+  try {
+    const makeSearch = req.query.search
+      ? {
+          $or: [
+            { category: { $regex: req.query.search, $options: "i" } },
+            // { content: { $regex: req.query.search, $options: "i" } },
+          ],
+        }
+      : {};
+    const post = await postModel.find(makeSearch);
+    // const post = await postModel.find({ category: req.query.search });
+
+    return res.status(200).json({
+      message: "read Post",
+      data: post,
+    });
+  } catch (error) {
+    return res.status(404).json({
+      message: "Unable to read Posts",
+    });
+  }
+};
+
 export const readOnePost = async (
   req: Request,
   res: Response,
