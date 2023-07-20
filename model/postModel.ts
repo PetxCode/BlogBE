@@ -7,6 +7,7 @@ interface iPost {
   image?: string;
   imageID?: string;
   category?: string;
+  userID?: string;
   likes?: [];
   comments?: [];
   views?: Array<string>;
@@ -27,6 +28,9 @@ const postModel = new mongoose.Schema(
       type: String,
     },
     imageID: {
+      type: String,
+    },
+    userID: {
       type: String,
     },
     views: {

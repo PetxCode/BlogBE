@@ -17,6 +17,9 @@ const postModel = new mongoose_1.default.Schema({
     imageID: {
         type: String,
     },
+    userID: {
+        type: String,
+    },
     views: {
         type: (Array),
     },

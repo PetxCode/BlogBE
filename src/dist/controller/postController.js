@@ -30,6 +30,7 @@ const createPost = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
             category,
             image: secure_url,
             imageID: public_id,
+            userID: user._id,
             user: user,
         });
         (_b = user === null || user === void 0 ? void 0 : user.post) === null || _b === void 0 ? void 0 : _b.push(new mongoose_1.default.Types.ObjectId(post._id));

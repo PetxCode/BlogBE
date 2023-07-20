@@ -41,10 +41,11 @@ export const signInUser = async (
 ): Promise<Response> => {
   try {
     const { email, password } = req.body;
-    const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(password, salt);
 
     const user = await authModel.findOne({ email });
+    console.log(user);
+    console.log(email);
+
     if (user) {
       const checkPassword = await bcrypt.compare(password, user?.password!);
 

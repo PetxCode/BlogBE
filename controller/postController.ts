@@ -24,6 +24,7 @@ export const createPost = async (
       category,
       image: secure_url,
       imageID: public_id,
+      userID: user._id,
       user: user,
     });
 

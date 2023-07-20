@@ -45,9 +45,9 @@ exports.createUser = createUser;
 const signInUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = req.body;
-        const salt = yield bcrypt_1.default.genSalt(10);
-        const hash = yield bcrypt_1.default.hash(password, salt);
         const user = yield authModel_1.default.findOne({ email });
+        console.log(user);
+        console.log(email);
         if (user) {
             const checkPassword = yield bcrypt_1.default.compare(password, user === null || user === void 0 ? void 0 : user.password);
             if (checkPassword) {
